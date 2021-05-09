@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Blog</title>
+
+	
+<meta name="description" content="Blog" />
+
+
+	<link href="../css/bootstrap.min.css" rel="stylesheet">
+	<link href="../css/isikdogan.css" rel="stylesheet">
+	<link href="../css/font-awesome.min.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+  <div class="navbar navbar-inverse navbar-static-top">
+  <div class="container">
+      <ul class="nav navbar-nav">
+          <li><a href="../index.html"><span class="fa fa-home fa-fw"></span> Home</a></li>
+          <li><a href="../blog/index.html"><span class="fa fa-pencil-square-o fa-fw"></span> Blog & Videos</a></li>
+          <!-- <li><a href="../projects.html"><span class="fa fa-cubes fa-fw"></span> Projects</a></li> -->
+          <li><a href="http://github.com/lordzuko" target="_blank"><span class="fa fa-github fa-fw"></span> GitHub</a></li>
+          <li><a href="https://www.youtube.com/c/HimanshuMauryalordzuko" target="_blank"><span class="fa fa-youtube-play fa-fw"></span> YouTube</a></li>
+          <li><a href="https://www.instagram.com/zuko2/" target="_blank"><span class="fa fa-instagram fa-fw"></span> Instagram</a></li>
+          <li><a href="https://www.linkedin.com/in/zuko2" target="_blank"><span class="fa fa-linkedin fa-fw"></span> LinkedIn</a></li>
+          <!-- <li><a href="https://scholar.google.com/citations?user=Esqaj-4AAAAJ&hl=en&oi=ao" target="_blank"><span class="fa fa-graduation-cap fa-fw"></span> Google Scholar</a></li> -->
+      </ul>
+  </div>
+  </div>
+
+    <div class="container">
+		<div class="main row">
+			
+
+	<form>
+		<input type="text" class="form-control" id="search" placeholder="Search...">
+	</form>
+
+	<div id="search-results-text" style="display:none">
+	<hr/>
+		<button id="back" class="btn btn-default btn-sm pull-right"><i class="fa fa-arrow-left fa-fw"></i> Go back</button>
+		<i class="fa fa-search fa-fw"></i> Search resutls for <code id="search-query"></code>:
+	</div>
+
+	<hr/>
+
+	<div class="list-of-posts">
+		
+		<div class="itembox">
+			<h3><a href="markdown-example.html">Markdown example
+</a></h3>
+			<span class="date">February 23, 2015</span>
+			<hr class="short clear"/>
+			<img class="pull-right blog-index-thumbnail" src="https://placeholdit.imgix.net/~text?txtsize=16&txt=100x100&w=100&h=100
+" alt="thumbnail"/>
+			<p>An example from the Markdown Wikipedia page
+</p>
+			<div class="vspace"></div>
+			<a class="btn btn-default btn-sm" href="markdown-example.html">Read on</a>
+		</div>
+		
+		<div class="itembox">
+			<h3><a href="an-example-blog-post-with-a-responsive-video-embed.html">An example blog post with a responsive video embed
+</a></h3>
+			<span class="date">February 22, 2015</span>
+			<hr class="short clear"/>
+			<img class="pull-right blog-index-thumbnail" src="https://i.ytimg.com/vi/VOi6LWzkCf4/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLDLnmfHAa3XOz_1yXsR8Wc1cQSXCg
+" alt="thumbnail"/>
+			<p>An example blog post with a responsive video embed
+</p>
+			<div class="vspace"></div>
+			<a class="btn btn-default btn-sm" href="an-example-blog-post-with-a-responsive-video-embed.html">Read on</a>
+		</div>
+		
+		<div class="itembox">
+			<h3><a href="lorem-ipsum.html">Lorem ipsum
+</a></h3>
+			<span class="date">February 21, 2015</span>
+			<hr class="short clear"/>
+			<img class="pull-right blog-index-thumbnail" src="https://placeholdit.imgix.net/~text?txtsize=16&txt=100x100&w=100&h=100
+" alt="thumbnail"/>
+			<p>Article summary comes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+</p>
+			<div class="vspace"></div>
+			<a class="btn btn-default btn-sm" href="lorem-ipsum.html">Read on</a>
+		</div>
+		
+	</div>
+
+<script type="text/javascript" src="../js/jquery-1.11.2.min.js"></script>
+<script>
+(function ($) {
+	// custom css expression for a case-insensitive contains()
+	jQuery.expr[':'].Contains = function(a,i,m){
+		return (a.textContent || a.innerText || "").toUpperCase().indexOf(m[3].toUpperCase())>=0;
+	};
+
+	function listFilter() {
+
+		$('#search')
+		.change( function () {
+			$('#search-results-text').show();
+
+			var filter = $(this).val();
+			if(filter) {
+				// this finds all links in a list that contain the input,
+				// and hide the ones not containing the input while showing the ones that do
+				$('.list-of-posts').find("div:not(:Contains(" + filter + "))").hide();
+				$('.list-of-posts').find("div:Contains(" + filter + ")").show();
+				$('#search-query').text(filter);
+				} else {
+					$('#search-results-text').hide();
+					$('.list-of-posts').find("div").show();
+			}
+			return false;
+		})
+		.keyup( function () {
+			// fire the above change event after every letter
+			$(this).change();
+		});
+
+		$( ".tag" ).click(function() {
+			$('#search').val($(this).text());
+			$('#search').change();
+		});
+
+		$( "#back" ).click(function() {
+			$('#search').val("");
+			$('#search').change();
+		});
+	}
+
+	//ondomready
+	$(function () {
+		listFilter($());
+	});
+}(jQuery));
+
+</script>
+
+
+		</div>
+
+    </div><!-- /.container -->
+
+	<link rel="icon" href="http://www.isikdogan.com/favicon.ico">
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+  </body>
+</html>

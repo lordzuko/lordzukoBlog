@@ -1,0 +1,30 @@
+{% extends "main_template.html" %}
+{% block title %}{{ post["title"] }}{% endblock %}
+
+{% block meta %}
+{% endblock %}
+
+{% block content %}
+{{ post["content"] }}
+<hr/>
+
+<h1>Projects</h1>
+{% for project in post["projects"] %}
+<div class="vspace"></div>
+<div class="project-itembox">
+    <img src="{{ project.find('picture').text }}" class="project-thumb"/>
+    <h5>{{ project.find('title').text }}</h5>
+    <p>
+    {{ project.find('date').text }}<br/>
+    {% if project.find('description').text != None %}
+        {{ project.find('description').text }}<br/>
+    {% endif %}
+    {{ project.find('type').text }}<br/>
+    {{ project.find('notes').text }}</p>
+    <hr class="short">
+    <div style="clear:both"></div>
+</div>
+{% endfor %}
+
+
+{% endblock %}
