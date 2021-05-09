@@ -15,6 +15,7 @@ class Page:
         self._read_markdown(markdown_file)
         self._parse_markdown_content()
         self._embed_videos()
+        self._embed_images()
 
     def _read_markdown(self, markdown_file):
         with codecs.open(markdown_file, "r", "utf-8") as f:
@@ -61,6 +62,15 @@ class Page:
                             'showsearch=0&amp;rel=0&amp;theme=light"></iframe></div>').format(vidcode)
                 self.content = self.content.replace(match.group(0), embed_code)
 
+    def _embed_images(self):
+        matches = re.finditer("\[img\](.*?)\[\/img\]", self.content)
+        for match in matches:
+            m = match.group(0)
+            url = m.replace("[img]", "")
+            url = url.replace("[/img]", "")
+            embed_code = ('<img src="{}">').format(url)
+            self.content = self.content.replace(m, embed_code)
+
     def get_dictionary(self):
         return self.__dict__
 
@@ -68,7 +78,8 @@ class BlogPost(Page):
     def __init__(self, markdown_file):
         super().__init__(markdown_file)
         self._parse_date()
-        self.filename = self.get_slugified_title() + ".html"
+        self.filename = "posts/" + self.get_slugified_title() + ".html"
+
 
     def _read_markdown(self, markdown_file):
         with codecs.open(markdown_file, "r", "utf-8") as f:
